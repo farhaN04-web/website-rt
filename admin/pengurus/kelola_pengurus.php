@@ -1,23 +1,24 @@
 <?php
 session_start();
 if (!isset($_SESSION['admin_id'])) {
-    header("Location: index.php");
+    // PERBAIKAN: Arahkan ke halaman login di folder admin
+    header("Location: ../index.php");
     exit();
 }
-include 'templates/header_admin.php';
-include '../config/koneksi.php';
+// PERBAIKAN: Path untuk header dan koneksi disesuaikan
+include '../templates/header_admin.php'; 
 ?>
 
 <div class="container-fluid">
     <h1 class="mt-4">Kelola Data Pengurus</h1>
 
-    <?php // Blok untuk menampilkan notifikasi
+    <?php // Blok untuk menampilkan notifikasi (bisa Anda lengkapi nanti)
     if(isset($_GET['status'])) {
-        // Anda bisa menambahkan logika notifikasi sukses/gagal di sini
+        // Logika notifikasi
     }
     ?>
 
-    <a href="pengurus/tambah_pengurus.php" class="btn btn-success mb-3"><i class="fas fa-plus"></i> Tambah Pengurus Baru</a>
+    <a href="tambah_pengurus.php" class="btn btn-success mb-3"><i class="fas fa-plus"></i> Tambah Pengurus Baru</a>
 
     <div class="card mb-4">
         <div class="card-header">Daftar Pengurus RT</div>
@@ -44,18 +45,18 @@ include '../config/koneksi.php';
                         <tr>
                             <td><?= $no++; ?></td>
                             <td>
-                                <img src="../assets/img/<?= htmlspecialchars($row['foto'] ?: 'default.png'); ?>" 
-                                    alt="Foto <?= htmlspecialchars($row['nama_lengkap']); ?>" width="70" class="img-thumbnail">
+                                <img src="<?= $base_url; ?>assets/img/<?= htmlspecialchars($row['foto'] ?: 'default.png'); ?>" 
+                                     alt="Foto <?= htmlspecialchars($row['nama_lengkap']); ?>" width="70" class="img-thumbnail">
                             </td>
                             <td><?= htmlspecialchars($row['nama_lengkap']); ?></td>
                             <td><?= htmlspecialchars($row['jabatan']); ?></td>
                             <td><?= htmlspecialchars($row['periode']); ?></td>
                             <td>
-                                <a href="pengurus/edit_pengurus.php?id=<?= $row['id']; ?>" class="btn btn-warning btn-sm">
+                                <a href="edit_pengurus.php?id=<?= $row['id']; ?>" class="btn btn-warning btn-sm">
                                     <i class="fas fa-edit"></i> Edit
                                 </a>
-                                <a href="pengurus/hapus_pengurus.php?id=<?= $row['id']; ?>" class="btn btn-danger btn-sm" 
-                                onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
+                                <a href="hapus_pengurus.php?id=<?= $row['id']; ?>" class="btn btn-danger btn-sm" 
+                                   onclick="return confirm('Apakah Anda yakin ingin menghapus data ini?')">
                                     <i class="fas fa-trash"></i> Hapus
                                 </a>
                             </td>
@@ -68,4 +69,4 @@ include '../config/koneksi.php';
     </div>
 </div>
 
-<?php include 'templates/footer_admin.php'; ?>
+<?php include '../templates/footer_admin.php'; ?>

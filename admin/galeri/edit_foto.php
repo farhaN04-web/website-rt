@@ -1,15 +1,18 @@
 <?php
 session_start();
 if (!isset($_SESSION['admin_id'])) {
-    header("Location: index.php");
+    // PERBAIKAN: Redirect harus naik satu level ke folder admin
+    header("Location: ../index.php");
     exit();
 }
-include 'templates/header_admin.php';
-include '../config/koneksi.php';
+// PERBAIKAN: Path untuk include disesuaikan
+include '../../config/koneksi.php';
+include '../templates/header_admin.php';
 
 // Ambil ID dari URL
 if (!isset($_GET['id'])) {
-    header("Location: galeri/kelola_galeri.php");
+    // PERBAIKAN: Redirect ke file di folder yang sama
+    header("Location: kelola_galeri.php");
     exit();
 }
 $id = $_GET['id'];
@@ -23,7 +26,8 @@ $data = mysqli_fetch_assoc($result);
 
 if (!$data) {
     echo "<div class='alert alert-danger'>Data tidak ditemukan.</div>";
-    include 'templates/footer_admin.php';
+    // PERBAIKAN: Path untuk footer disesuaikan
+    include '../templates/footer_admin.php';
     exit();
 }
 ?>
@@ -32,7 +36,7 @@ if (!$data) {
     <h1 class="mt-4">Edit Foto Kegiatan</h1>
     <div class="card mb-4">
         <div class="card-body">
-            <form action="galeri/proses_galeri.php" method="POST" enctype="multipart/form-data">
+            <form action="proses_galeri.php" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="<?= $data['id']; ?>">
                 <input type="hidden" name="gambar_lama" value="<?= htmlspecialchars($data['url_gambar']); ?>">
 
@@ -46,16 +50,19 @@ if (!$data) {
                 </div>
                 <div class="mb-3">
                     <label for="gambar" class="form-label">Pilih Foto Baru</label><br>
-                    <img src="../assets/img/<?= htmlspecialchars($data['url_gambar']); ?>" width="200" class="img-thumbnail mb-2">
+                    <img src="<?= $base_url; ?>assets/img/<?= htmlspecialchars($data['url_gambar']); ?>" width="200" class="img-thumbnail mb-2">
                     <input type="file" class="form-control" id="gambar" name="gambar" accept="image/*">
                     <small class="text-muted">Kosongkan jika tidak ingin mengubah foto.</small>
                 </div>
                 
                 <button type="submit" name="update" class="btn btn-primary">Update Foto</button>
-                <a href="galeri/kelola_galeri.php" class="btn btn-secondary">Batal</a>
+                <a href="kelola_galeri.php" class="btn btn-secondary">Batal</a>
             </form>
         </div>
     </div>
 </div>
 
-<?php include 'templates/footer_admin.php'; ?>
+<?php 
+// PERBAIKAN: Path footer disesuaikan
+include '../templates/footer_admin.php'; 
+?>

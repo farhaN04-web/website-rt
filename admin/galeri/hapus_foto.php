@@ -1,6 +1,7 @@
 <?php
 session_start();
-include '../config/koneksi.php';
+// PERBAIKAN: Path harus naik DUA level untuk mencapai folder config
+include '../../config/koneksi.php';
 
 if (!isset($_SESSION['admin_id'])) {
     die("Akses ditolak.");
@@ -17,9 +18,10 @@ if (isset($_GET['id'])) {
     if ($data = mysqli_fetch_assoc($result)) {
         $gambar_dihapus = $data['url_gambar'];
         
-        // Langkah 2: Hapus file gambar dari folder assets/img
-        if (file_exists("../assets/img/" . $gambar_dihapus)) {
-            unlink("../assets/img/" . $gambar_dihapus);
+        // Langkah 2: Hapus file gambar dari folder
+        // PERBAIKAN: Path untuk memeriksa dan menghapus file harus naik DUA level
+        if (file_exists("../../assets/img/" . $gambar_dihapus)) {
+            unlink("../../assets/img/" . $gambar_dihapus);
         }
     }
     mysqli_stmt_close($stmt_select);
@@ -29,13 +31,15 @@ if (isset($_GET['id'])) {
     mysqli_stmt_bind_param($stmt_delete, "i", $id);
     
     if (mysqli_stmt_execute($stmt_delete)) {
-        header("Location: galeri/kelola_galeri.php?status=hapus_sukses");
+        // PERBAIKAN: Redirect ke file di folder yang sama
+        header("Location: kelola_galeri.php?status=hapus_sukses");
     } else {
-        header("Location: galeri/kelola_galeri.php?status=gagal");
+        header("Location: kelola_galeri.php?status=gagal");
     }
     mysqli_stmt_close($stmt_delete);
 
 } else {
-    header("Location: galeri/kelola_galeri.php");
+    // PERBAIKAN: Redirect ke file di folder yang sama
+    header("Location: kelola_galeri.php");
 }
 ?>

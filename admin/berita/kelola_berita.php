@@ -4,13 +4,13 @@ if (!isset($_SESSION['admin_id'])) {
     header("Location: index.php");
     exit();
 }
-include '../config/koneksi.php';
-include 'templates/header_admin.php';
+include '../../config/koneksi.php';
+include '../templates/header_admin.php';
 ?>
 
 <div class="container-fluid">
     <h1 class="mt-4">Kelola Berita</h1>
-    <a href="berita/tambah_berita.php" class="btn btn-success mb-3">Tambah Berita Baru</a>
+    <a href="tambah_berita.php" class="btn btn-success mb-3">Tambah Berita Baru</a>
 
     <div class="card mb-4">
         <div class="card-header">Daftar Berita</div>
@@ -36,8 +36,8 @@ include 'templates/header_admin.php';
                         <td><?= htmlspecialchars($row['judul']); ?></td>
                         <td><?= date('d M Y', strtotime($row['tanggal_publikasi'])); ?></td>
                         <td>
-                            <a href="berita/edit_berita.php?id=<?= $row['id']; ?>" class="btn btn-warning btn-sm">Edit</a>
-                            <a href="berita/hapus_berita.php?id=<?= $row['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus berita ini?')">Hapus</a>
+                            <a href="edit_berita.php?id=<?= $row['id']; ?>" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="hapus_berita.php?id=<?= $row['id']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus berita ini?')">Hapus</a>
                         </td>
                     </tr>
                     <?php } ?>
@@ -47,4 +47,4 @@ include 'templates/header_admin.php';
     </div>
 </div>
 
-<?php include 'templates/footer_admin.php'; ?>
+<?php include '../templates/footer_admin.php'; ?>

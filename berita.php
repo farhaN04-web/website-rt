@@ -22,7 +22,6 @@ include 'templates/header.php';
         <div class="card flex-md-row shadow-sm h-md-250">
             <img src="<?= $base_url; ?>assets/img/<?= htmlspecialchars($berita['gambar']); ?>" class="card-img-left flex-auto d-none d-md-block" style="width: 200px; object-fit: cover;" alt="Gambar Berita">
             <div class="card-body d-flex flex-column align-items-start">
-                <strong class="d-inline-block mb-2 text-primary">Info RT</strong>
                 <h3 class="mb-0">
                     <a class="text-dark" href="detail_berita.php?id=<?= $berita['id']; ?>"><?= htmlspecialchars($berita['judul']); ?></a>
                 </h3>

@@ -1,10 +1,12 @@
 <?php
 session_start();
 if (!isset($_SESSION['admin_id'])) {
-    header("Location: index.php");
+    // PERBAIKAN: Redirect harus naik satu level ke folder admin
+    header("Location: ../index.php");
     exit();
 }
-include 'templates/header_admin.php';
+// PERBAIKAN: Path untuk include disesuaikan
+include '../templates/header_admin.php';
 ?>
 
 <div class="container-fluid">
@@ -36,4 +38,7 @@ include 'templates/header_admin.php';
     </div>
 </div>
 
-<?php include 'templates/footer_admin.php'; ?>
+<?php 
+// PERBAIKAN: Path untuk include disesuaikan
+include '../templates/footer_admin.php'; 
+?>

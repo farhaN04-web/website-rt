@@ -29,7 +29,6 @@ if ($berita) {
                 <h1 class="fw-bolder mb-1"><?= htmlspecialchars($berita['judul']); ?></h1>
                 <div class="text-muted fst-italic mb-2">
                     Dipublikasikan pada <?= date('d F Y', strtotime($berita['tanggal_publikasi'])); ?> 
-                    oleh <?= htmlspecialchars($berita['penulis'] ?? 'Admin'); ?>
                 </div>
             </header>
             

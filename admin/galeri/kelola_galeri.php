@@ -1,17 +1,20 @@
 <?php
 session_start();
 if (!isset($_SESSION['admin_id'])) {
-    header("Location: index.php");
+    // PERBAIKAN: Arahkan ke halaman login di folder admin
+    header("Location: ../index.php"); 
     exit();
 }
-include '../config/koneksi.php';
-include 'templates/header_admin.php'; // Pastikan Anda punya template header admin
+// PERBAIKAN: Path harus naik DUA level untuk ke folder config
+include '../../config/koneksi.php'; 
+// PERBAIKAN: Path harus naik SATU level untuk ke folder templates
+include '../templates/header_admin.php';
 ?>
 
 <div class="container-fluid">
     <h1 class="mt-4">Kelola Galeri Kegiatan</h1>
 
-    <?php // Blok untuk menampilkan notifikasi
+    <?php // Blok notifikasi sudah benar
     if(isset($_GET['status'])):
         $status = $_GET['status'];
         $alert_class = ($status == 'sukses' || $status == 'update_sukses' || $status == 'hapus_sukses') ? 'alert-success' : 'alert-danger';
@@ -24,7 +27,7 @@ include 'templates/header_admin.php'; // Pastikan Anda punya template header adm
     endif;
     ?>
 
-    <a href="galeri/tambah_foto.php" class="btn btn-success mb-3">Tambah Foto Baru</a>
+    <a href="tambah_foto.php" class="btn btn-success mb-3">Tambah Foto Baru</a>
 
     <div class="card mb-4">
         <div class="card-header">Daftar Foto Kegiatan</div>
@@ -48,7 +51,7 @@ include 'templates/header_admin.php'; // Pastikan Anda punya template header adm
                     ?>
                     <tr>
                         <td><?= $no++; ?></td>
-                        <td><img src="../assets/img/<?= htmlspecialchars($row['url_gambar']); ?>" width="100"></td>
+                        <td><img src="<?= $base_url; ?>assets/img/<?= htmlspecialchars($row['url_gambar']); ?>" width="100"></td>
                         <td><?= htmlspecialchars($row['judul_kegiatan']); ?></td>
                         <td><?= date('d M Y', strtotime($row['tanggal_kegiatan'])); ?></td>
                         <td>
@@ -63,4 +66,7 @@ include 'templates/header_admin.php'; // Pastikan Anda punya template header adm
     </div>
 </div>
 
-<?php include 'templates/footer_admin.php'; // Pastikan Anda punya template footer admin ?>
+<?php 
+// PERBAIKAN: Path harus naik SATU level untuk ke folder templates
+include '../templates/footer_admin.php'; 
+?>

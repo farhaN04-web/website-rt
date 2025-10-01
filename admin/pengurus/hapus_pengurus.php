@@ -1,6 +1,7 @@
 <?php
 session_start();
-include '../config/koneksi.php';
+// PERBAIKAN: Path harus naik DUA level untuk mencapai folder config
+include '../../config/koneksi.php';
 
 if (!isset($_SESSION['admin_id'])) {
     die("Akses ditolak.");
@@ -16,8 +17,9 @@ if (isset($_GET['id'])) {
     $result = mysqli_stmt_get_result($stmt_select);
     if ($data = mysqli_fetch_assoc($result)) {
         $foto_dihapus = $data['foto'];
-        if (!empty($foto_dihapus) && file_exists("../assets/img/" . $foto_dihapus)) {
-            unlink("../assets/img/" . $foto_dihapus);
+        // PERBAIKAN: Path untuk memeriksa dan menghapus file harus naik DUA level
+        if (!empty($foto_dihapus) && file_exists("../../assets/img/" . $foto_dihapus)) {
+            unlink("../../assets/img/" . $foto_dihapus);
         }
     }
     mysqli_stmt_close($stmt_select);
@@ -27,13 +29,15 @@ if (isset($_GET['id'])) {
     mysqli_stmt_bind_param($stmt_delete, "i", $id);
     
     if (mysqli_stmt_execute($stmt_delete)) {
-        header("Location: pengurus/kelola_pengurus.php?status=hapus_sukses");
+        // PERBAIKAN: Redirect ke file di folder yang sama
+        header("Location: kelola_pengurus.php?status=hapus_sukses");
     } else {
-        header("Location: pengurus/kelola_pengurus.php?status=gagal");
+        header("Location: kelola_pengurus.php?status=gagal");
     }
     mysqli_stmt_close($stmt_delete);
 
 } else {
-    header("Location: pengurus/kelola_pengurus.php");
+    // PERBAIKAN: Redirect ke file di folder yang sama
+    header("Location: kelola_pengurus.php");
 }
 ?>

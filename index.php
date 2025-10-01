@@ -11,9 +11,9 @@ include 'templates/header.php';
   </div>
 </div>
 
-<div class="row">
-    <h2 class="mb-3 border-bottom pb-2">Berita & Pengumuman Terbaru</h2>
 
+<div class="row justify-content-center">
+    <h2 class="mb-3 border-bottom pb-2 text-center"><b>Berita & Pengumuman Terbaru</b></h2>
     <?php
     $query_berita = "SELECT * FROM berita ORDER BY tanggal_publikasi DESC LIMIT 3";
     $result_berita = mysqli_query($koneksi, $query_berita);

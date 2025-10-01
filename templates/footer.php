@@ -2,8 +2,7 @@
 
 <footer class="bg-light text-center text-lg-start mt-5">
 <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.05);">
-    © 2025 Copyright:
-    <a class="text-dark" href="#">Warga RT 02 RW 02</a>
+    © 2025 Copyright: RT 02 RW 02 Rejasari
 </div>
 </footer>
 

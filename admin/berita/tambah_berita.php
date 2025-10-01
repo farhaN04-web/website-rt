@@ -1,10 +1,12 @@
 <?php
 session_start();
 if (!isset($_SESSION['admin_id'])) {
-    header("Location: index.php");
+    // PERBAIKAN: Redirect harus naik satu level ke folder admin
+    header("Location: ../index.php");
     exit();
 }
-include 'templates/header_admin.php';
+// PERBAIKAN: Path harus naik satu level untuk menemukan folder templates
+include '../templates/header_admin.php';
 ?>
 
 <div class="container-fluid">
@@ -12,7 +14,7 @@ include 'templates/header_admin.php';
 
     <div class="card mb-4">
         <div class="card-body">
-            <form action="berita/proses_berita.php" method="POST" enctype="multipart/form-data">
+            <form action="proses_berita.php" method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label for="judul" class="form-label">Judul Berita</label>
                     <input type="text" class="form-control" id="judul" name="judul" required>
@@ -27,10 +29,13 @@ include 'templates/header_admin.php';
                 </div>
                 <input type="hidden" name="penulis" value="<?= htmlspecialchars($_SESSION['admin_username']); ?>">
                 <button type="submit" name="simpan" class="btn btn-primary">Simpan Berita</button>
-                <a href="berita/kelola_berita.php" class="btn btn-secondary">Batal</a>
+                <a href="kelola_berita.php" class="btn btn-secondary">Batal</a>
             </form>
         </div>
     </div>
 </div>
 
-<?php include 'templates/footer_admin.php'; ?>
+<?php 
+// PERBAIKAN: Path harus naik satu level untuk menemukan folder templates
+include '../templates/footer_admin.php'; 
+?>
